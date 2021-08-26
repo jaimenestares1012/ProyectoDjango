@@ -1,8 +1,9 @@
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import DeleteView
 from aplications.departamento.models import Departamento
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import (TemplateView, ListView, DetailView, CreateView)
+from django.views.generic import (TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView)
 # Create your views here.
 
 
@@ -61,6 +62,42 @@ class sucessView(TemplateView):
 class CreateEmpleado(CreateView):
      template_name="persona/create.html"
      model=Empleado
-     fields=('__all__')
+     fields=[
+         'first_name',
+         'last_name',
+         'job',
+         'departamento',
+         'habilidades'
+     ]
      success_url=reverse_lazy('persona_app:sucesion')
 
+     def form_valid(self, form):
+         ##logica del proceso
+         empleado=form.save()
+         empleado.full_name=empleado.first_name + '' + empleado.last_name
+         empleado.save()
+         return super(CreateEmpleado, self).form_valid(form)
+
+class EmpleadoUpdateView(UpdateView):
+    template_name="persona/update.html"
+
+    model=Empleado
+    fields=[
+        'first_name',
+        'last_name',
+        'job',
+        'departamento',
+        'habilidades',
+    ]
+    success_url=reverse_lazy('persona_app:sucesion')
+    def post(self, request, *args, **kwargs) :
+        self.object=self.get_object()
+        return super().post(request, *args, **kwargs)
+    def form_valid(self, form) :
+        return super(EmpleadoUpdateView,self).form_valid(form)
+
+
+class delete(DeleteView):
+    model=Empleado
+    template_name="persona/delete.html"
+    success_url=reverse_lazy('persona_app:sucesion')

@@ -12,5 +12,7 @@ urlpatterns = [
     path('detalle_personas/<pk>/', views.EmpleadoDetailView.as_view()),
     path('create/', views.CreateEmpleado.as_view()),
     path('sucess/', views.sucessView.as_view(), name="sucesion"),
+    path('update/<pk>', views.EmpleadoUpdateView.as_view(), name="modificar"),
+    path('delete/<pk>', views.delete.as_view(), name="eliminar"),
 
 ]

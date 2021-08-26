@@ -1,0 +1,5 @@
+<h1>creacion de nuevos empleados</h1>
+<form method="POST">{% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Agregar persona</button>
+</form>

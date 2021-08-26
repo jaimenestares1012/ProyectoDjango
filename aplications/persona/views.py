@@ -1,6 +1,8 @@
+from django.views.generic.base import TemplateView
 from aplications.departamento.models import Departamento
 from django.shortcuts import render
-from django.views.generic import (ListView, DetailView)
+from django.urls import reverse_lazy
+from django.views.generic import (TemplateView, ListView, DetailView, CreateView)
 # Create your views here.
 
 
@@ -52,3 +54,13 @@ class EmpleadoDetailView(DetailView):
         context= super(EmpleadoDetailView, self).get_context_data(**kwargs)
         context['titulo']='Empleado del mes'
         return context
+
+class sucessView(TemplateView):
+    template_name="persona/sucess.html"
+
+class CreateEmpleado(CreateView):
+     template_name="persona/create.html"
+     model=Empleado
+     fields=('__all__')
+     success_url=reverse_lazy('persona_app:sucesion')
+

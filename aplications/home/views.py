@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, CreateView
 
 #################### impotamos el modelo para trabjar con ellas en el template
-
+from .forms import PruebaForm
 from .models import Prueba
 # Create your views here.
 class PruebaView(TemplateView):
@@ -24,4 +24,5 @@ class PruebaCreateView(CreateView):
 
     template_name = "home/add.html"
     model=Prueba
-    fields=['titulo', 'subtitulo', 'cantidad']
+    form_class=PruebaForm
+    success_url='/'

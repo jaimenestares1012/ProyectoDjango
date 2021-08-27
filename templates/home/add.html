@@ -1,2 +1,5 @@
 <h1>aca crearemos las cosas </h1>
-{{form}}
+<form method="POST">{% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">agregar</button>
+</form>

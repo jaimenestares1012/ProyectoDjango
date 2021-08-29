@@ -8,12 +8,19 @@ from django.views.generic import (TemplateView, ListView, DetailView, CreateView
 
 
 from .models import Empleado, Habilidades
-
+class InicioView(TemplateView):
+    template_name="inicio.html"
 
 class ListaAllEmpleado(ListView):
     template_name='persona/lista_all.html'
-    paginate_by= 4
-    model=Empleado
+    paginate_by= 5
+    
+    def get_queryset(self):
+        palabra_clave=self.request.GET.get("Kword", '')
+        lista=Empleado.objects.filter(
+            first_name__icontains=palabra_clave
+        )
+        return lista
 
 
 class ListaByEmpleado(ListView):
@@ -46,7 +53,7 @@ class ListHabilidadesEmpleados(ListView):
             first_name=empleado
         ) 
         return []
-
+###datos de los empleados
 class EmpleadoDetailView(DetailView):
     model=Empleado
     template_name="persona/detalle_persona.html"

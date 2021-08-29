@@ -1,3 +1,55 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+Lista de empleados
+{% endblock title %}
+
+
+{% block content %}
+{% include 'includes/header.html' %}
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell"> Detalle empleado </h1>
+
+        <div class="cell">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="200">Id</th>
+                        <th>Nombres</th>
+                        <th width="150">Apellidos</th>
+                        <th width="150">Departamento</th>
+                        <th width="150">Habilidades</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+                        
+                        
+                    <tr>
+                        <td>{{empleado.id}}</td>
+                        <td>{{empleado.first_name}}</td>
+                        <td>{{empleado.last_name}}</td>
+                        <td>{{empleado.departamento}}</td>
+                        <td>{{empleado.habilidades}}</td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+            <a href="{% url 'persona_app:empleados_all' %}">volver a la lista de empleados</a>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock content %}
+
+
+
+
 <h1>detalle personas {{titulo}}
 
 </h1>

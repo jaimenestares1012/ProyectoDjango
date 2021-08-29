@@ -27,7 +27,7 @@ class Empleado(models.Model):
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
     habilidades = models.ManyToManyField(Habilidades)
     hoja_vida= RichTextField()
-    #image = models.ImageField(, upload_to=None, height_field=None, width_field=None, max_length=None)
+    image = models.ImageField(upload_to='empleado', blank=True, null=True)
     class Meta:
         verbose_name='empleados'
         verbose_name_plural="Los empleados"

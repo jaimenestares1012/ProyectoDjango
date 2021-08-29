@@ -1,3 +1,52 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+    Registro de datos
+{% endblock title %}
+    
+
+{% block content %}
+{% include 'includes/header.html' %}
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Registro de empleados y sus deparmentos</h1>
+        <form class="cell callout grid-x grid-margin-x" method="POST">{% csrf_token %} 
+            <div class="medium-6 cell">
+                <label>Nombres
+                    {{form.nombre}}
+                </label>
+            </div>
+            <div class="medium-6 cell">
+                <label>Apellido
+                    {{form.apellidos}}
+                </label>
+            </div>
+            <h1 class="cell"> Ingrese los datos de su depa</h1>
+            <div class="medium-6 cell">
+                <label>Departamento
+                    {{form.departamento}}
+                </label>
+            </div>
+            <div class="medium-6 cell">
+                <label>Shorname
+                    {{form.shorname}}
+                </label>
+            </div>
+
+            <div class="medium-6 cell">
+                <button class="button alert" type="submit">Agregar </button>
+
+            </div>
+           
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock content %}
+    
 <h1>Registrar nuevos Departamentos </h1>
 <form method="POST">{% csrf_token %}
     <h2>Datos empleados</h2>

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Lista de empleados
+Lista de departamento
 {% endblock title %}
 
 
@@ -9,10 +9,10 @@ Lista de empleados
 {% include 'includes/header.html' %}
 <div class="grid-container">
     <div class="grid-x">
-        <h1 class="cell">Lista de empleados</h1>
+        <h1 class="cell">Lista de Departementos</h1>
         <form class="cell grid-x grid-margin-x" method="GET">{% csrf_token %}
             <div class="cell large-7">
-                <input type="text" id="Kword" name="Kword" placeholder="buscar empleado">
+                <input type="text" id="dep" name="depa" placeholder="buscar departamento">
             </div>
             <div class="cell large-5">
                 <button type="submit" class="sucess button">buscar</button>
@@ -20,15 +20,6 @@ Lista de empleados
         </form>
         <div class="cell">
             <table>
-                <thead>
-                    <tr>
-                        <th width="200">Id</th>
-                        <th>Nombres</th>
-                        <th width="150">Apellidos</th>
-                        <th width="150">Departamento</th>
-                        <th width="150">Accion</th>
-                    </tr>
-                </thead>
                 <tbody>
                     
                     {% for e in object_list  %}
@@ -36,11 +27,11 @@ Lista de empleados
                         
                     <tr>
                         <td>{{e.id}}</td>
-                        <td>{{e.first_name}}</td>
-                        <td>{{e.last_name}}</td>
-                        <td>{{e.departamento}}</td>
+                        <td>{{e.name}}</td>
+                        <td>{{e.shor_name}}</td>
+                        <td>{{e.anulate}}</td>
                         <td>
-                            <a class="button success" href="{% url 'persona_app:detalle_empleado' e.id %}">ver</a>
+                            <a class="button success" href="{% url 'persona_app:empleados_por_departamento' e.shor_name %}">Ver empleados</a>
 
                         </td>
                     </tr>

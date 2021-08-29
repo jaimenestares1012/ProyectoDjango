@@ -8,10 +8,12 @@ from django.views.generic import (TemplateView, ListView, DetailView, CreateView
 
 
 from .models import Empleado, Habilidades
+from .forms import EmpleadoForm
 class InicioView(TemplateView):
     template_name="inicio.html"
 
 class ListaAllEmpleado(ListView):
+    ########### lista de empleados ###################3
     template_name='persona/lista_all.html'
     paginate_by= 5
     
@@ -24,9 +26,9 @@ class ListaAllEmpleado(ListView):
 
 
 class ListaByEmpleado(ListView):
+    ############################# lista de empleados por departamento
     template_name='persona/lista_by.html'
-    queryset=Empleado.objects.filter(
-    ) 
+    context_object_name='empleado'
     def get_queryset(self):
         area=self.kwargs['shorname']
         lista=Empleado.objects.filter(
@@ -69,14 +71,8 @@ class sucessView(TemplateView):
 class CreateEmpleado(CreateView):
      template_name="persona/create.html"
      model=Empleado
-     fields=[
-         'first_name',
-         'last_name',
-         'job',
-         'departamento',
-         'habilidades'
-     ]
-     success_url=reverse_lazy('persona_app:sucesion')
+     form_class=EmpleadoForm
+     success_url=reverse_lazy('persona_app:empleados_all')
 
      def form_valid(self, form):
          ##logica del proceso
@@ -96,7 +92,7 @@ class EmpleadoUpdateView(UpdateView):
         'departamento',
         'habilidades',
     ]
-    success_url=reverse_lazy('persona_app:sucesion')
+    success_url=reverse_lazy('persona_app:lista_editar_eliminar')
     def post(self, request, *args, **kwargs) :
         self.object=self.get_object()
         return super().post(request, *args, **kwargs)
@@ -107,4 +103,14 @@ class EmpleadoUpdateView(UpdateView):
 class delete(DeleteView):
     model=Empleado
     template_name="persona/delete.html"
-    success_url=reverse_lazy('persona_app:sucesion')
+    success_url=reverse_lazy('persona_app:lista_editar_eliminar')
+
+
+class ListaAllEmpleadoAdmin(ListView):
+    ########### lista de empleados ###################3
+    template_name='persona/lista_all_admin.html'
+    paginate_by= 7
+    ordering='first_name'
+    context_object_name="empleados  "
+    
+    model=Empleado

@@ -1,7 +1,65 @@
-<h1>actualizaciones en django</h1>
-<form method="POST">{% csrf_token %}
-    
-{{form.as_p}}
-<button type="submit">Actualizar</button>
 
-</form>
+{% extends 'base.html' %}
+
+{% block title %}
+Administrar la lista de empleados
+{% endblock title %}
+
+
+{% block content %}
+{% include 'includes/header.html' %}
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Modifica empleados</h1>
+        <div class="cell">
+            <form class="grid-x grid-margin-x"  method="POST">{% csrf_token %}
+                <div class="cell large-6">
+                    <label> Nombres:
+                        {{form.first_name}}
+                    </label>
+
+                </div>
+                <div class="cell large-6">
+                    <label> Apellidos:
+                        {{form.last_name}}
+                    </label>
+
+                </div>
+                <div class="cell large-6">
+                    <label> Trabajps:
+                        {{form.job}}
+                    </label>
+
+                </div>
+                <div class="cell large-6">
+                    <label> Departamento:
+                        {{form.departamento}}
+                    </label>
+
+                </div>
+                <div class="cell large-6">
+                    <label> Habilidades:
+                        {{form.habilidades}}
+                    </label>
+
+                </div>
+                <div class="cell large-6">
+                    <button type="submit" class="sucess button">Actualizar</button>
+
+                </div>
+                
+                </form>
+
+        </div>
+      
+        
+    </div>
+
+
+</div>
+
+{% endblock content %}
+
+
+
+

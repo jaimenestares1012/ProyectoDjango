@@ -1,16 +1,47 @@
-
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}
-Lista de empleados
+{{object.full_name}}
 {% endblock title %}
 
 
 {% block content %}
 {% include 'includes/header.html' %}
 <div class="grid-container">
-    <div class="grid-x">
+    <div class="grid-x grid-margin-x align-center">
         <h1 class="cell"> Detalle empleado </h1>
+
+        <div class="cell large-4 card " style="width: 300px;">
+            <div class="card-divider">
+                {{empleado.get_job_display}}
+            </div>
+
+            {% if empleado.image %}
+            <img src="empleado.image.url">
+            {% else %}
+            <img src="{% static 'img/img1.jpeg' %}">
+
+            {% endif %}
+
+            <div class="card-section">
+                <h4>{{empleado.full_name}}</h4>
+                <p>{{empleado.last_name}}</p>
+                <p>{{empleado.departamento.name}}</p>
+                <p>
+                    <span class="label">HABILIDADES : </span>
+                    <ul>
+                        
+                        {% for h in empleado.habilidades.all %}
+                        <li>{{h.habilidad}}</li>
+                            
+                        {% endfor %}
+                            
+                    </ul>
+                </p>
+            </div>
+        </div>
+
+
 
         <div class="cell">
             <table>
@@ -24,9 +55,9 @@ Lista de empleados
                     </tr>
                 </thead>
                 <tbody>
-                    
-                        
-                        
+
+
+
                     <tr>
                         <td>{{empleado.id}}</td>
                         <td>{{empleado.first_name}}</td>
@@ -38,7 +69,7 @@ Lista de empleados
 
                 </tbody>
             </table>
-            <a href="{% url 'persona_app:empleados_all' %}">volver a la lista de empleados</a>
+            <!-- <a href="{% url 'persona_app:empleados_por_departamento' empleado.id %}">volver a la lista de empleados</a> -->
         </div>
     </div>
 
@@ -59,4 +90,3 @@ Lista de empleados
 <p>{{empleado.last_name}}</p>
 <p>{{empleado.departamento}}</p>
 <p>{{empleado.habilidades}}</p>
-

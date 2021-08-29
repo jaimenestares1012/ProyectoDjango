@@ -1,10 +1,63 @@
-<h1>lista de empleados con filtro</h1>
 
-<ul>
-{% for w in object_list %}
-    <li>
-        {{w}}
+{% extends 'base.html' %}
 
-    </li>
-{% endfor %}
-    </ul>
+{% block title %}
+Lista de empleados por departamento
+{% endblock title %}
+
+
+{% block content %}
+{% include 'includes/header.html' %}
+
+
+<div class="grid-container">
+    <div class="grid-x">
+        <div class="cell">Empleados por area</div>
+        <div class="cell">
+            <div class="cell">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="200">Id</th>
+                            <th>Nombres</th>
+                            <th width="150">Apellidos</th>
+                            <th width="150">Departamento</th>
+                            <th width="150">Accion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for e in empleado  %}
+                            
+                            
+                        <tr>
+                            <td>{{e.id}}</td>
+                            <td>{{e.first_name}}</td>
+                            <td>{{e.last_name}}</td>
+                            <td>{{e.departamento}}</td>
+                            <td>
+                                <a class="button success" href="{% url 'persona_app:detalle_empleado' e.id %}">ver</a>
+    
+                            </td>
+                        </tr>
+                        {% endfor %}
+    
+                    </tbody>
+                </table>
+            </div>
+            <a href="{% url 'departamento_app:lista_departamento' %}">Regresar lista de departamento</a>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+

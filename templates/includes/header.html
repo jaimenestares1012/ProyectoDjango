@@ -6,14 +6,18 @@
                 <a href="{% url 'persona_app:empleados_all' %}">Listar</a>
           
             </li>
-            <li><a href="#">Departamentos</a></li>
-            <li><a href="#">Adminsistrar</a></li>
+            <li><a href="{% url 'departamento_app:lista_departamento' %}">Departamentos</a></li>
+            <li><a href="{% url 'persona_app:lista_editar_eliminar' %}">Adminsistrar</a></li>
+            <li><a href="{% url 'departamento_app:nuevo_depa' %}">Nuevo departamento</a></li>
+
         </ul>
     </div>
     <div class="top-bar-right">
         <ul class="menu">
             <li><input type="search" placeholder="Buscador"></li>
-            <li><button type="button" class="button">Registrar nuevo</button></li>
+            <li>
+                <a href="{% url 'persona_app:crear' %}" class="button">Registrar nuevo</a> 
+           </li>
         </ul>
     </div>
 </div>
